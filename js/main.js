@@ -1,4 +1,7 @@
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Setup Socket IO
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 var appio = new (function() {
 	var self=this;
 	this.efn = function(){}
@@ -36,12 +39,15 @@ var appio = new (function() {
 		this.cfg.onDisconnected(); 
 	}
 })();
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Application Logic
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function log(s){
 	var jlog=$('.log');
 	jlog.html(jlog.html() + '<br>' + s);
 }
 function render(dt) {
+	//roompanel
 	if(!appio.room){
 		$('#roompanel h1').html('No Room, ' + (appio.isConnected?'Connected':'Disconnected') );
 		$('#roompanel ul').empty();
@@ -52,6 +58,7 @@ function render(dt) {
 			$('<li />').html((ind+1) + '. ' + ele.id + (appio.player.id==ele.id?' (You)':'')).appendTo($('#roompanel ul'));
 		});
 	}
+	//msgsendto
 	if(!appio.room){
 		$('#msgsendto').prop('disabled',true).empty().trigger('update');
 	}else{
